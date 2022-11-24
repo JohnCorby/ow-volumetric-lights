@@ -1,0 +1,10 @@
+{
+  "$schema": "https://raw.githubusercontent.com/ow-mods/owml/master/schemas/manifest_schema.json",
+  "filename": "VolumetricLights.dll",
+  "author": "JohnCorby",
+  "name": "VolumetricLights",
+  "uniqueName": "JohnCorby.VolumetricLights",
+  "version": "0.1.0",
+  "owmlVersion": "2.7.4",
+  "dependencies": []
+}

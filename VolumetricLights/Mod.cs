@@ -1,17 +1,42 @@
 ﻿using OWML.Common;
 using OWML.ModHelper;
+using UnityEngine;
 
 namespace VolumetricLights;
 
 public class Mod : ModBehaviour
 {
-	public override void Configure(IModConfig config)
+	public static IModHelper Helper;
+
+	private void Start()
 	{
+		Helper = ModHelper;
+
+		LoadManager.OnCompleteSceneLoad += (_, _) =>
+		{
+			Helper.Events.Unity.FireOnNextUpdate(Apply);
+		};
 	}
 
-	private static void ApplyLights()
+	public override void Configure(IModConfig config)
 	{
-		if (LoadManager.GetCurrentScene() != OWScene.SolarSystem) return;
+		Apply();
+	}
 
+	private static void Apply()
+	{
+		if (LoadManager.GetCurrentScene() is not OWScene.SolarSystem or OWScene.EyeOfTheUniverse) return;
+
+		Helper.Console.WriteLine("applying stuff");
+		
+		foreach (var camera in Resources.FindObjectsOfTypeAll<Camera>())
+		{
+			var volumetricLightRenderer = camera.gameObject.GetAddComponent<VolumetricLightRenderer>();
+		}
+		
+		foreach (var light in Resources.FindObjectsOfTypeAll<Light>())
+		{
+			var volumetricLight = light.gameObject.GetAddComponent<VolumetricLight>();
+		}
 	}
 }

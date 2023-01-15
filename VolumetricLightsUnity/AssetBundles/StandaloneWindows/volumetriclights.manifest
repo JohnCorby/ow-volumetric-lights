@@ -1,22 +1,25 @@
 ManifestFileVersion: 0
-CRC: 3627847299
+CRC: 3354155064
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: ebc9e869a026f8279b57c4936716ceb2
+    Hash: 83d880e8377893e25b1a69ba339a98bd
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 2c8988ac2083246e0cc7e34c05a709a4
+    Hash: 88cf8c0ac96a055e936323a63c862700
 HashAppended: 0
 ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
 - Class: 49
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/Resources/NoiseVolume.bytes
-- Assets/Shaders/VolumetricLight.shader
-- Assets/Shaders/BlitAdd.shader
 - Assets/Shaders/BilateralBlur.shader
+- Assets/Shaders/BlitAdd.shader
+- Assets/Shaders/VolumetricLight.shader
+- Assets/Resources/NoiseVolume.bytes
+- Assets/Textures/spot.png
 Dependencies: []

@@ -1,7 +1,7 @@
 ManifestFileVersion: 0
-CRC: 1064860030
+CRC: 4056674174
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: volumetric
+      Name: volumetriclights
       Dependencies: {}

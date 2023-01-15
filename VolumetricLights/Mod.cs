@@ -14,7 +14,7 @@ public class Mod : ModBehaviour
 	{
 		Helper = ModHelper;
 
-		ResourceBundle = ModHelper.Assets.LoadBundle("volumetric");
+		ResourceBundle = ModHelper.Assets.LoadBundle("volumetriclights");
 
 		LoadManager.OnCompleteSceneLoad += (_, _) =>
 		{

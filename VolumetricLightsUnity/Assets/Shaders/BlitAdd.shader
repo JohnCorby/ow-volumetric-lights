@@ -1,4 +1,4 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
 //  Copyright(c) 2016, Michal Skalsky
 //  All rights reserved.
@@ -29,10 +29,10 @@
 
 
 
-Shader "Hidden/BlitAdd"
+Shader "Hidden/BlitAdd" 
 {
 	Properties{ _MainTex("Texture", any) = "" {} }
-		SubShader
+	SubShader
 	{
 		Pass
 		{
@@ -50,13 +50,13 @@ Shader "Hidden/BlitAdd"
 			uniform float4 _MainTex_ST;
 			float4 _Source_TexelSize;
 
-			struct appdata_t
+			struct appdata_t 
 			{
 				float4 vertex : POSITION;
 				float2 texcoord : TEXCOORD0;
 			};
 
-			struct v2f
+			struct v2f 
 			{
 				float4 vertex : SV_POSITION;
 				float2 texcoord : TEXCOORD0;
@@ -88,5 +88,5 @@ Shader "Hidden/BlitAdd"
 			ENDCG
 		}
 	}
-		Fallback Off
+	Fallback Off
 }

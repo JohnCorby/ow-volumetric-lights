@@ -31,7 +31,8 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Rendering;
 using System;
-using VolumetricLights;
+
+namespace VolumetricLights;
 
 [RequireComponent(typeof(Camera))]
 public class VolumetricLightRenderer : MonoBehaviour

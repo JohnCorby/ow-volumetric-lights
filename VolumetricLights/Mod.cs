@@ -8,20 +8,17 @@ namespace VolumetricLights;
 
 public class Mod : ModBehaviour
 {
-	public static IModHelper Helper;
 	public static AssetBundle ResourceBundle;
 
 	private static readonly HashSet<Light> _lightsWithNoShadows = new();
 
 	private void Start()
 	{
-		Helper = ModHelper;
-
 		ResourceBundle = ModHelper.Assets.LoadBundle("volumetriclights");
 
 		LoadManager.OnCompleteSceneLoad += (_, _) =>
 		{
-			Helper.Events.Unity.FireOnNextUpdate(() =>
+			ModHelper.Events.Unity.FireOnNextUpdate(() =>
 			{
 				_lightsWithNoShadows.Clear();
 				Apply();
@@ -29,16 +26,19 @@ public class Mod : ModBehaviour
 		};
 	}
 
-	public override void Configure(IModConfig config) => Apply();
-
-	private static void Apply()
+	public override void Configure(IModConfig config)
 	{
-		var resolution = EnumUtils.Parse<VolumetricLightRenderer.VolumtericResolution>(Helper.Config.GetSettingsValue<string>("Resolution"));
-		var shadows = Helper.Config.GetSettingsValue<bool>("Shadows");
-		var sampleCount = Helper.Config.GetSettingsValue<int>("Sample Count");
-		var scatteringCoef = Helper.Config.GetSettingsValue<float>("Scattering Coefficient");
-		var extinctionCoef = Helper.Config.GetSettingsValue<float>("Extinction Coefficient");
-		var mieG = Helper.Config.GetSettingsValue<float>("Mie Scattering");
+		ModHelper.Events.Unity.RunWhen(() => ResourceBundle, Apply);
+	}
+
+	private void Apply()
+	{
+		var resolution = EnumUtils.Parse<VolumetricLightRenderer.VolumtericResolution>(ModHelper.Config.GetSettingsValue<string>("Resolution"));
+		var shadows = ModHelper.Config.GetSettingsValue<bool>("Shadows");
+		var sampleCount = ModHelper.Config.GetSettingsValue<int>("Sample Count");
+		var scatteringCoef = ModHelper.Config.GetSettingsValue<float>("Scattering Coefficient");
+		var extinctionCoef = ModHelper.Config.GetSettingsValue<float>("Extinction Coefficient");
+		var mieG = ModHelper.Config.GetSettingsValue<float>("Mie Scattering");
 
 		foreach (var camera in Resources.FindObjectsOfTypeAll<Camera>())
 		{
@@ -68,10 +68,7 @@ public class Mod : ModBehaviour
 			}
 			else
 			{
-				if (_lightsWithNoShadows.Contains(light))
-				{
-					light.shadows = LightShadows.None;
-				}
+				if (_lightsWithNoShadows.Contains(light)) light.shadows = LightShadows.None;
 			}
 		}
 	}

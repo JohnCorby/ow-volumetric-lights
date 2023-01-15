@@ -1,3 +1,16 @@
 {
-  "enabled": true
+  "enabled": true,
+  "settings": {
+    "Resolution": {
+      "type": "selector",
+      "value": "Full",
+      "options": ["Quarter", "Half", "Full"],
+      "tooltip": "Resolution of the renderers. Doesn't seem to make that much of a difference performance-wise."
+    },
+    "Shadows": {
+      "type": "toggle",
+      "value": false,
+      "tooltip": "Toggles every light having shadows. Kills performance."
+    }
+  }
 }

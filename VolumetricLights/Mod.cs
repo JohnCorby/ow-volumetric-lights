@@ -33,9 +33,13 @@ public class Mod : ModBehaviour
 
 		Helper.Console.WriteLine("applying stuff");
 
+		var resolution = Helper.Config.GetSettingsValue<VolumetricLightRenderer.VolumtericResolution>("resolution");
+		var shadows = Helper.Config.GetSettingsValue<bool>("shadows");
+
 		foreach (var camera in Resources.FindObjectsOfTypeAll<Camera>())
 		{
 			var volumetricLightRenderer = camera.gameObject.GetAddComponent<VolumetricLightRenderer>();
+			volumetricLightRenderer.Resolution = resolution;
 		}
 
 		foreach (var light in Resources.FindObjectsOfTypeAll<Light>())
@@ -45,8 +49,9 @@ public class Mod : ModBehaviour
 
 			var volumetricLight = light.gameObject.GetAddComponent<VolumetricLight>();
 
-			if (light.shadows == LightShadows.None)
-				light.shadows = LightShadows.Soft;
+			if (shadows)
+				if (light.shadows == LightShadows.None)
+					light.shadows = LightShadows.Soft;
 		}
 	}
 }

@@ -12,7 +12,7 @@ public class Mod : ModBehaviour
 	public static AssetBundle ResourceBundle;
 
 	private static readonly List<VolumetricLightRenderer> _renderers = new();
-	private static readonly List<(VolumetricLight, LightShadows)> _lights = new();
+	private static readonly List<(VolumetricLight, Light, LightShadows)> _lights = new();
 
 	private void Start()
 	{
@@ -42,7 +42,7 @@ public class Mod : ModBehaviour
 					if (light.name.StartsWith("ThrusterLight")) continue;
 
 					var volumetricLight = light.gameObject.AddComponent<VolumetricLight>();
-					_lights.Add((volumetricLight, light.shadows));
+					_lights.Add((volumetricLight, light, light.shadows));
 				}
 
 				Apply();
@@ -54,6 +54,8 @@ public class Mod : ModBehaviour
 
 	private static void Apply()
 	{
+		if (LoadManager.GetCurrentScene() is not OWScene.SolarSystem or OWScene.EyeOfTheUniverse) return;
+
 		var resolution = EnumUtils.Parse<VolumetricLightRenderer.VolumtericResolution>(Helper.Config.GetSettingsValue<string>("Resolution"));
 		var shadows = Helper.Config.GetSettingsValue<bool>("Shadows");
 
@@ -62,16 +64,16 @@ public class Mod : ModBehaviour
 			volumetricLightRenderer.Resolution = resolution;
 		}
 
-		foreach (var (volumetricLight, lightShadows) in _lights)
+		foreach (var (volumetricLight, light, lightShadows) in _lights)
 		{
 			if (shadows)
 			{
-				if (volumetricLight.Light.shadows == LightShadows.None)
-					volumetricLight.Light.shadows = LightShadows.Soft;
+				if (light.shadows == LightShadows.None)
+					light.shadows = LightShadows.Soft;
 			}
 			else
 			{
-				volumetricLight.Light.shadows = lightShadows;
+				light.shadows = lightShadows;
 			}
 		}
 	}

@@ -33,8 +33,8 @@ public class Mod : ModBehaviour
 
 		Helper.Console.WriteLine("applying stuff");
 
-		var resolution = Helper.Config.GetSettingsValue<VolumetricLightRenderer.VolumtericResolution>("resolution");
-		var shadows = Helper.Config.GetSettingsValue<bool>("shadows");
+		var resolution = VolumetricLightRenderer.VolumtericResolution.Quarter;
+		var shadows = false;
 
 		foreach (var camera in Resources.FindObjectsOfTypeAll<Camera>())
 		{

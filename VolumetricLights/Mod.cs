@@ -68,7 +68,10 @@ public class Mod : ModBehaviour
 			}
 			else
 			{
-				if (_lightsWithNoShadows.Contains(light)) light.shadows = LightShadows.None;
+				if (_lightsWithNoShadows.Contains(light))
+				{
+					light.shadows = LightShadows.None;
+				}
 			}
 		}
 	}

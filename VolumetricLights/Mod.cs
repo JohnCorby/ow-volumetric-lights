@@ -20,16 +20,6 @@ public class Mod : ModBehaviour
 		};
 
 		ResourceBundle = ModHelper.Assets.LoadBundle("volumetric");
-
-		foreach (var item in ResourceBundle.GetAllAssetNames())
-		{
-			ModHelper.Console.WriteLine(item);
-		}
-
-		foreach (var item in ResourceBundle.GetAllScenePaths())
-		{
-			ModHelper.Console.WriteLine(item);
-		}
 	}
 
 	public override void Configure(IModConfig config)
@@ -42,30 +32,21 @@ public class Mod : ModBehaviour
 		if (LoadManager.GetCurrentScene() is not OWScene.SolarSystem or OWScene.EyeOfTheUniverse) return;
 
 		Helper.Console.WriteLine("applying stuff");
-		
+
 		foreach (var camera in Resources.FindObjectsOfTypeAll<Camera>())
 		{
 			var volumetricLightRenderer = camera.gameObject.GetAddComponent<VolumetricLightRenderer>();
 		}
-		
+
 		foreach (var light in Resources.FindObjectsOfTypeAll<Light>())
 		{
-			if (light.type == LightType.Point && light.cookie != null)
-			{
-				continue;
-			}
-
-			if (light.type == LightType.Directional)
-			{
-				continue;
-			}
+			if (light.type == LightType.Directional) continue;
+			if (light.type == LightType.Point && light.cookie) continue;
 
 			var volumetricLight = light.gameObject.GetAddComponent<VolumetricLight>();
 
 			if (light.shadows == LightShadows.None)
-			{
 				light.shadows = LightShadows.Soft;
-			}
 		}
 	}
 }

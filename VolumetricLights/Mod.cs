@@ -63,7 +63,7 @@ public class Mod : ModBehaviour
 				if (light.shadows == LightShadows.None)
 				{
 					_lightsWithNoShadows.Add(light);
-					light.shadows = LightShadows.Hard;
+					light.shadows = LightShadows.Soft;
 				}
 			}
 			else

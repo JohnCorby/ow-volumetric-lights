@@ -8,6 +8,8 @@ public class Mod : ModBehaviour
 {
 	public static IModHelper Helper;
 
+	public static AssetBundle ResourceBundle;
+
 	private void Start()
 	{
 		Helper = ModHelper;
@@ -16,6 +18,18 @@ public class Mod : ModBehaviour
 		{
 			Helper.Events.Unity.FireOnNextUpdate(Apply);
 		};
+
+		ResourceBundle = ModHelper.Assets.LoadBundle("volumetric");
+
+		foreach (var item in ResourceBundle.GetAllAssetNames())
+		{
+			ModHelper.Console.WriteLine(item);
+		}
+
+		foreach (var item in ResourceBundle.GetAllScenePaths())
+		{
+			ModHelper.Console.WriteLine(item);
+		}
 	}
 
 	public override void Configure(IModConfig config)
@@ -36,7 +50,22 @@ public class Mod : ModBehaviour
 		
 		foreach (var light in Resources.FindObjectsOfTypeAll<Light>())
 		{
+			if (light.type == LightType.Point && light.cookie != null)
+			{
+				continue;
+			}
+
+			if (light.type == LightType.Directional)
+			{
+				continue;
+			}
+
 			var volumetricLight = light.gameObject.GetAddComponent<VolumetricLight>();
+
+			if (light.shadows == LightShadows.None)
+			{
+				light.shadows = LightShadows.Soft;
+			}
 		}
 	}
 }

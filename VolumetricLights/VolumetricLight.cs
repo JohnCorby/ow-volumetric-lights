@@ -31,6 +31,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.Rendering;
 using System;
+using VolumetricLights;
 
 [RequireComponent(typeof(Light))]
 public class VolumetricLight : MonoBehaviour 
@@ -105,7 +106,9 @@ public class VolumetricLight : MonoBehaviour
             _light.AddCommandBuffer(LightEvent.AfterShadowMap, _commandBuffer);
 
         Shader shader = Shader.Find("Sandbox/VolumetricLight");
-        if (shader == null)
+		if (!shader)
+			shader = Mod.ResourceBundle.LoadAsset<Shader>("Assets/Shaders/VolumetricLight.shader");
+		if (shader == null)
             throw new Exception("Critical Error: \"Sandbox/VolumetricLight\" shader is missing. Make sure it is included in \"Always Included Shaders\" in ProjectSettings/Graphics.");
         _material = new Material(shader); // new Material(VolumetricLightRenderer.GetLightMaterial());
     }

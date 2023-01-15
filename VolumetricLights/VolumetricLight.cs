@@ -25,7 +25,8 @@
 //  TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
 //  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
+#define UNITY_5_4_OR_NEWER
+#define UNITY_5_5_OR_NEWER
 
 using UnityEngine;
 using System.Collections;
@@ -106,9 +107,8 @@ public class VolumetricLight : MonoBehaviour
             _light.AddCommandBuffer(LightEvent.AfterShadowMap, _commandBuffer);
 
         Shader shader = Shader.Find("Sandbox/VolumetricLight");
-		if (!shader)
-			shader = Mod.ResourceBundle.LoadAsset<Shader>("Assets/Shaders/VolumetricLight.shader");
-		if (shader == null)
+        if (!shader) shader = Mod.ResourceBundle.LoadAsset<Shader>("Assets/Shaders/VolumetricLight.shader");
+        if (shader == null)
             throw new Exception("Critical Error: \"Sandbox/VolumetricLight\" shader is missing. Make sure it is included in \"Always Included Shaders\" in ProjectSettings/Graphics.");
         _material = new Material(shader); // new Material(VolumetricLightRenderer.GetLightMaterial());
     }

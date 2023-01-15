@@ -46,6 +46,7 @@ public class Mod : ModBehaviour
 		{
 			if (light.type == LightType.Directional) continue;
 			if (light.type == LightType.Point && light.cookie) continue;
+			if (light.name.StartsWith("ThrusterLight")) continue;
 
 			var volumetricLight = light.gameObject.GetAddComponent<VolumetricLight>();
 

@@ -5,6 +5,6 @@
   "name": "VolumetricLights",
   "uniqueName": "JohnCorby.VolumetricLights",
   "version": "0.1.0",
-  "owmlVersion": "2.7.4",
+  "owmlVersion": "2.9.0",
   "dependencies": []
 }

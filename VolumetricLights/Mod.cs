@@ -14,12 +14,12 @@ public class Mod : ModBehaviour
 	{
 		Helper = ModHelper;
 
+		ResourceBundle = ModHelper.Assets.LoadBundle("volumetric");
+
 		LoadManager.OnCompleteSceneLoad += (_, _) =>
 		{
 			Helper.Events.Unity.FireOnNextUpdate(Apply);
 		};
-
-		ResourceBundle = ModHelper.Assets.LoadBundle("volumetric");
 	}
 
 	public override void Configure(IModConfig config)

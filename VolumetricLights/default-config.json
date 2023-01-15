@@ -11,6 +11,26 @@
       "type": "toggle",
       "value": false,
       "tooltip": "Toggles every light having shadows. Kills performance."
+    },
+    "Sample Count": {
+      "type": "number",
+      "value": 8,
+      "tooltip": "Number of raymarching samples. Trades quality for performance"
+    },
+    "Scattering Coefficient": {
+      "type": "number",
+      "value": 0.5,
+      "tooltip": "Controls amount of light that is reflected towards camera. Makes the effect stronger."
+    },
+    "Extinction Coefficient": {
+      "type": "number",
+      "value": 0.01,
+      "tooltip": "Controls amount of light absorbed or out-scattered with distance. Makes the effect weaker with increasing distance."
+    },
+    "Mie Scattering": {
+      "type": "number",
+      "value": 0.1,
+      "tooltip": "Controls how light is reflected with respect to light's direction."
     }
   }
 }

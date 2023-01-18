@@ -325,7 +325,6 @@ public class VolumetricLightRenderer : MonoBehaviour
             PreRenderEvent(this, _viewProj);
     }
 
-    [ImageEffectOpaque]
     public void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
         if (Resolution == VolumtericResolution.Quarter)

@@ -249,7 +249,7 @@ public class VolumetricLight : MonoBehaviour
         }
 
         bool forceShadowsOff = false;
-        if ((_light.transform.position - Camera.current.transform.position).magnitude >= QualitySettings.shadowDistance)
+        if (UnityEngine.XR.XRSettings.enabled || (_light.transform.position - Camera.current.transform.position).magnitude >= QualitySettings.shadowDistance)
             forceShadowsOff = true;
 
         if (_light.shadows != LightShadows.None && forceShadowsOff == false)
@@ -338,7 +338,7 @@ public class VolumetricLight : MonoBehaviour
         }
 
         bool forceShadowsOff = false;
-        if ((_light.transform.position - Camera.current.transform.position).magnitude >= QualitySettings.shadowDistance)
+        if (UnityEngine.XR.XRSettings.enabled || (_light.transform.position - Camera.current.transform.position).magnitude >= QualitySettings.shadowDistance)
             forceShadowsOff = true;
 
         if (_light.shadows != LightShadows.None && forceShadowsOff == false)
